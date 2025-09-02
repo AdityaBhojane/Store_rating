@@ -1,5 +1,5 @@
 
-import prisma from "../configs/db.js";
+import prisma from "../configs/dbConfig.js";
 
 
 export const userService = {

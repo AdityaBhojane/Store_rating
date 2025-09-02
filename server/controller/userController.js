@@ -1,6 +1,6 @@
 import { userService } from "../services/userService.js";
 
-export const listStores = async (req, res) => {
+export const getListStoresController = async (req, res) => {
   try {
     const userId = req.user.id;
     const stores = await userService.getStoresService(userId, req.query);
@@ -10,7 +10,7 @@ export const listStores = async (req, res) => {
   }
 };
 
-export const submitRating = async (req, res) => {
+export const submitRatingController = async (req, res) => {
   try {
     const userId = req.user.id;
     const { storeId, rating } = req.body;
@@ -23,7 +23,7 @@ export const submitRating = async (req, res) => {
 };
 
 
-export const modifyRating = async (req, res) => {
+export const modifyRatingController = async (req, res) => {
   try {
     const userId = req.user.id;
     const { storeId, rating } = req.body;

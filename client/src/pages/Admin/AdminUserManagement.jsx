@@ -2,10 +2,7 @@ import { useMemo, useState } from "react";
 import { AddUserModal } from "../../components/AddUserModel";
 import { UserDetailsModal } from "../../components/UserDetailsModel";
 
-export 
-
-
-const AdminUserManagement= ({ users, setUsers, initialStores }) => {
+export const AdminUserManagement= ({ users, setUsers, initialStores }) => {
     const [filters, setFilters] = useState({ name: '', email: '', address: '', role: '' });
     const [isAddModalOpen, setAddModalOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);

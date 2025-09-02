@@ -1,29 +1,34 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { RateStoreModal } from '../../components/RateStoreModel';
 import { UpdatePasswordModal } from '../../components/UpdatePasswordModel';
 import { StoreCard } from '../../components/StoreCard';
-
-const initialStores = [
-    { id: 1, name: 'SuperMart', address: '123 Market St', overallRating: 4.5 },
-    { id: 2, name: 'QuickGrocer', address: '456 Commerce Ave', overallRating: 4.2 },
-    { id: 3, name: 'The Corner Store', address: '789 Retail Rd', overallRating: 4.8 },
-    { id: 4, name: 'Fresh Finds', address: '101 Produce Plaza', overallRating: 4.0 },
-    { id: 5, name: 'City Staples', address: '212 Downtown Dr', overallRating: 3.9 },
-];
-
-const initialUserRatings = [
-    { storeId: 1, rating: 5 },
-    { storeId: 3, rating: 4 },
-];
+import axios from 'axios';
 
 
 
 export default function UserDashboard() {
-    const [stores] = useState(initialStores);
-    const [userRatings, setUserRatings] = useState(initialUserRatings);
+    const [stores, setStore] = useState([]);
+    const [userRatings, setUserRatings] = useState([]);
     const [filters, setFilters] = useState({ name: '', address: '' });
     const [selectedStore, setSelectedStore] = useState(null);
     const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
+
+    useEffect(()=>{
+      const fetchInitial = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const res = await axios.get("http://localhost:5000/api/user/users", {
+            headers: { token: `Bearer ${token}` },
+          });
+          setUserRatings(res.data.store.rating);
+          setStore(res.data.store)
+        } catch (err) {
+          console.error("❌ Failed to fetch users:", err);
+          throw err;
+        }
+      };
+      fetchInitial()
+  },[])
 
     const filteredStores = useMemo(() => {
         return stores.filter(store =>

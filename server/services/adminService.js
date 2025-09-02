@@ -1,4 +1,4 @@
-import prisma from "../configs/db.js";
+import prisma from "../configs/dbConfig.js";
 import argon2 from "argon2";
 
 export const adminService = {

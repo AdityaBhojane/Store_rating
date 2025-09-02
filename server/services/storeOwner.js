@@ -1,3 +1,4 @@
+import prisma from "../configs/dbConfig.js";
 
 
 export const getStoreRatings = async (ownerId) => {

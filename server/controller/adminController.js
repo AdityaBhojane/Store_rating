@@ -46,7 +46,7 @@ export const getStoresForAdminController = async (req, res) => {
   }
 };
 
-export const getUserForAdminController = async (req, res) => {
+export const getUserDetailsForAdminController = async (req, res) => {
   try {
     const user = await adminService.getUserDetailsForAdminService(req.params.id);
     res.json(user);
